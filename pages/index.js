@@ -10,14 +10,24 @@ export default function Home() {
   const [dashboardData, setDashboardData] = useState([]);
 
   useEffect(() => {
-    const fetchDoneOrders = async () => {
-      const response = await axios
+    const fetchData = async () => {
+      const doneOrders = await axios
         .get(`/api/getDoneOrders?cryptos=${cryptos}`)
         .then((res) => res.data);
-      setDashboardData(calculateForDashboard(response));
+
+      let prices = await axios
+        .get(`/api/getPrices?cryptos=${cryptos}`)
+        .then((res) => res.data);
+
+      prices = prices.reduce(function (acc, cur, i) {
+        acc[Object.keys(cur)[0]] = Object.values(cur)[0];
+        return acc;
+      }, {});
+
+      setDashboardData(calculateForDashboard(doneOrders, prices));
     };
 
-    fetchDoneOrders();
+    fetchData();
   }, []);
 
   return (

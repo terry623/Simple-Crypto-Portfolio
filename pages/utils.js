@@ -1,7 +1,9 @@
-export const calculateForDashboard = (allCryptoData) => {
+export const calculateForDashboard = (doneOrders, prices) => {
   const values = [];
 
-  allCryptoData.forEach(({ symbol, orders }) => {
+  doneOrders.forEach(({ symbol, orders }) => {
+    const price = parseFloat(prices[symbol]).toFixed(2);
+
     const sumOfSold = orders
       .filter((order) => order.side === "SELL")
       .reduce((accumulator, currentValue) => {
@@ -20,22 +22,26 @@ export const calculateForDashboard = (allCryptoData) => {
       .filter((order) => order.side === "SELL")
       .reduce((accumulator, currentValue) => {
         return accumulator + parseFloat(currentValue.executedQty);
-      }, 0)
-      .toFixed(5);
+      }, 0);
 
     const sumOfHoldingsBuy = orders
       .filter((order) => order.side === "BUY")
       .reduce((accumulator, currentValue) => {
         return accumulator + parseFloat(currentValue.executedQty);
-      }, 0)
-      .toFixed(5);
+      }, 0);
+
+    const holdings = (sumOfHoldingsBuy - sumOfHoldingsSell).toFixed(5);
+
+    const value = (price * holdings).toFixed(2);
 
     values.push({
       key: symbol,
+      price,
       crypto: symbol,
       sold: sumOfSold,
       bought: sumOfBought,
-      holdings: sumOfHoldingsBuy - sumOfHoldingsSell,
+      holdings,
+      value,
     });
   });
 

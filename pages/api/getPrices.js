@@ -1,13 +1,12 @@
 import binance from "./binance";
 
-const getDoneOrders = (crypto) =>
+const getPrices = (crypto) =>
   new Promise((resolve, reject) => {
-    binance.allOrders(crypto, (error, orders, symbol) => {
+    binance.prices(crypto, (error, ticker) => {
       if (error) {
         reject(error);
       }
-      orders = orders.filter((order) => order.status === "FILLED");
-      resolve({ symbol, orders });
+      resolve(ticker);
     });
   });
 
@@ -16,7 +15,7 @@ export default async function index(req, res) {
 
   const promises = [];
   cryptos.forEach((crypto) => {
-    promises.push(getDoneOrders(crypto));
+    promises.push(getPrices(crypto));
   });
 
   const result = await Promise.all(promises);
