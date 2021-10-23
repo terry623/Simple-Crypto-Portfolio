@@ -34,13 +34,8 @@ export const dashboardColumns = [
     key: "holdings",
   },
   {
-    title: "Holdings",
-    dataIndex: "holdings",
-    key: "holdings",
-  },
-  {
     title: "Value",
-    dataIndex: "valud",
-    key: "valud",
+    dataIndex: "value",
+    key: "value",
   },
 ];
