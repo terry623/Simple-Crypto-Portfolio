@@ -1,5 +1,9 @@
 export const calculateForDashboard = (doneOrders, prices) => {
   const values = [];
+  prices = prices.reduce(function (acc, cur, i) {
+    acc[Object.keys(cur)[0]] = Object.values(cur)[0];
+    return acc;
+  }, {});
 
   doneOrders.forEach(({ symbol, orders }) => {
     const price = parseFloat(prices[symbol]).toFixed(2);
