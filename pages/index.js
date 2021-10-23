@@ -1,8 +1,25 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useEffect } from "react";
+import axios from "axios";
+
 import styles from "../styles/Home.module.css";
+import { cryptos } from "./constants";
 
 export default function Home() {
+  useEffect(() => {
+    const promises = [];
+    cryptos.forEach((crypto) => {
+      promises.push(axios.get(`/api/getDoneOrders?crypto=${crypto}`));
+    });
+
+    Promise.all(promises)
+      .then((values) => values.map((value) => value.data))
+      .then((values) => {
+        console.log(values);
+      });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
