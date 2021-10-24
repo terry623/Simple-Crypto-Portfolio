@@ -20,6 +20,11 @@ export default async function index(req, res) {
     promises.push(getPrices(crypto + ticker));
   });
 
-  const result = await Promise.all(promises);
-  res.status(200).json(result);
+  try {
+    const result = await Promise.all(promises);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
 }
