@@ -6,9 +6,7 @@ import styles from "styles/Dashboard.module.css";
 import { cryptos, dashboardColumns } from "constants";
 import { calculateForDashboard } from "utils";
 
-export default function Dashboard() {
-  const [dashboardData, setDashboardData] = useState([]);
-
+const Dashboard = ({ data, setData }) => {
   useEffect(() => {
     const fetchData = async () => {
       const doneOrders = await axios
@@ -19,7 +17,7 @@ export default function Dashboard() {
         .get(`/api/getPrices?cryptos=${cryptos}`)
         .then((res) => res.data);
 
-      setDashboardData(calculateForDashboard(doneOrders, prices));
+        setData(calculateForDashboard(doneOrders, prices));
     };
 
     fetchData();
@@ -27,7 +25,9 @@ export default function Dashboard() {
 
   return (
     <div className={styles.container}>
-      <Table columns={dashboardColumns} dataSource={dashboardData} />
+      <Table columns={dashboardColumns} dataSource={data} />
     </div>
   );
-}
+};
+
+export default Dashboard;

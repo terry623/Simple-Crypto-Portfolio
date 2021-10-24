@@ -1,3 +1,5 @@
+import { ticker } from "constants";
+
 export const calculateForDashboard = (doneOrders, prices) => {
   const values = [];
   prices = prices.reduce(function (acc, cur, i) {
@@ -41,7 +43,7 @@ export const calculateForDashboard = (doneOrders, prices) => {
     values.push({
       key: symbol,
       price,
-      crypto: symbol,
+      crypto: symbol.replace(ticker, ""),
       sold: sumOfSold,
       bought: sumOfBought,
       holdings,
@@ -50,4 +52,11 @@ export const calculateForDashboard = (doneOrders, prices) => {
   });
 
   return values;
+};
+
+export const calculateForAssetPie = (data) => {
+  return data.map((d) => ({
+    type: d.crypto,
+    value: parseFloat(d.value),
+  }));
 };

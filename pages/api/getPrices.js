@@ -1,5 +1,7 @@
 import binance from "./binance";
 
+import { ticker } from "../../constants";
+
 const getPrices = (crypto) =>
   new Promise((resolve, reject) => {
     binance.prices(crypto, (error, ticker) => {
@@ -15,7 +17,7 @@ export default async function index(req, res) {
 
   const promises = [];
   cryptos.forEach((crypto) => {
-    promises.push(getPrices(crypto));
+    promises.push(getPrices(crypto + ticker));
   });
 
   const result = await Promise.all(promises);

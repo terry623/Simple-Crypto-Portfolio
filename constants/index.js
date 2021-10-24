@@ -1,11 +1,6 @@
-export const cryptos = [
-  "BTCUSDT",
-  "ETHUSDT",
-  "FTTUSDT",
-  "SOLUSDT",
-  "AVAXUSDT",
-  "FLOWUSDT",
-];
+export const cryptos = ["BTC", "ETH", "FTT", "SOL", "AVAX", "FLOW"];
+
+export const ticker = "USDT";
 
 export const dashboardColumns = [
   {
