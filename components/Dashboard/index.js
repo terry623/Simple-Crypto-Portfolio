@@ -1,30 +1,13 @@
-import { useEffect } from "react";
-import axios from "axios";
+
 import { Table, Typography } from "antd";
 
 const { Text } = Typography;
 
 import styles from "styles/Dashboard.module.css";
-import { cryptos, dashboardColumns } from "constants";
-import { calculateForDashboard, intl } from "utils";
+import { dashboardColumns } from "constants";
+import { intl } from "utils";
 
-const Dashboard = ({ data, setData }) => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const doneOrders = await axios
-        .get(`/api/getDoneOrders?cryptos=${cryptos}`)
-        .then((res) => res.data);
-
-      const prices = await axios
-        .get(`/api/getPrices?cryptos=${cryptos}`)
-        .then((res) => res.data);
-
-      setData(calculateForDashboard(doneOrders, prices));
-    };
-
-    fetchData();
-  }, []);
-
+const Dashboard = ({ data }) => {
   return (
     <div className={styles.container}>
       <Table
@@ -37,13 +20,11 @@ const Dashboard = ({ data, setData }) => {
           let totalBought = 0;
           let totalBalance = 0;
 
-          data.forEach(
-            ({ soldNumber, boughtNumber, valueNumber, balanceNumber }) => {
-              totalSold += soldNumber;
-              totalBought += boughtNumber;
-              totalBalance += balanceNumber;
-            }
-          );
+          data.forEach(({ soldNumber, boughtNumber, balanceNumber }) => {
+            totalSold += soldNumber;
+            totalBought += boughtNumber;
+            totalBalance += balanceNumber;
+          });
 
           return (
             <Table.Summary.Row fixed>
