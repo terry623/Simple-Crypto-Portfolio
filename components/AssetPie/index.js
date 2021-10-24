@@ -32,8 +32,6 @@ function renderStatistic(containerWidth, text, style) {
 const AssetPie = ({ data }) => {
   data = calculateForAssetPie(data);
 
-  console.log({ data });
-
   const config = {
     appendPadding: 10,
     data: data,
@@ -41,29 +39,23 @@ const AssetPie = ({ data }) => {
     colorField: "type",
     radius: 1,
     innerRadius: 0.64,
-    meta: {
-      value: {
-        formatter: function formatter(v) {
-          return "".concat(v, " \xA5");
-        },
-      },
-    },
+    legend: false,
     label: {
       type: "inner",
       offset: "-50%",
       style: { textAlign: "center" },
       autoRotate: false,
-      content: "{name}",
+      content: "{name}\n{percentage}",
     },
     statistic: {
       title: {
-        offsetY: -4,
+        offsetY: -8,
         customHtml: function customHtml(container, view, datum) {
           const _container$getBoundin = container.getBoundingClientRect();
           const width = _container$getBoundin.width;
           const height = _container$getBoundin.height;
           const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
-          const text = datum ? datum.type : "總計";
+          const text = datum ? datum.type : "Total Value";
           return renderStatistic(d, text, { fontSize: 28 });
         },
       },
@@ -76,17 +68,17 @@ const AssetPie = ({ data }) => {
           const text = datum
             ? "$".concat(datum.value)
             : "$".concat(
-                data.reduce(function (r, d) {
-                  return r + d.value;
-                }, 0)
+                data
+                  .reduce(function (r, d) {
+                    return r + d.value;
+                  }, 0)
+                  .toFixed(2)
               );
           return renderStatistic(width, text, { fontSize: 32 });
         },
       },
     },
     interactions: [
-      { type: "element-selected" },
-      { type: "element-active" },
       {
         type: "pie-statistic-active",
         cfg: {

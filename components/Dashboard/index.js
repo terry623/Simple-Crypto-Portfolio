@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { Table } from "antd";
 
@@ -17,7 +17,7 @@ const Dashboard = ({ data, setData }) => {
         .get(`/api/getPrices?cryptos=${cryptos}`)
         .then((res) => res.data);
 
-        setData(calculateForDashboard(doneOrders, prices));
+      setData(calculateForDashboard(doneOrders, prices));
     };
 
     fetchData();
@@ -25,7 +25,7 @@ const Dashboard = ({ data, setData }) => {
 
   return (
     <div className={styles.container}>
-      <Table columns={dashboardColumns} dataSource={data} />
+      <Table columns={dashboardColumns} dataSource={data} pagination={false} />
     </div>
   );
 };
