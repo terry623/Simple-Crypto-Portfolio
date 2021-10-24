@@ -1,0 +1,27 @@
+[
+  {
+    "crypto": "BTC",
+    "type": "Yield farming",
+    "total": -0.00106005
+  },
+  {
+    "crypto": "ETH",
+    "type": "Yield farming",
+    "total": -0.00264
+  },
+  {
+    "crypto": "FTT",
+    "type": "Yield farming",
+    "total": 0.0732414
+  },
+  {
+    "crypto": "SOL",
+    "type": "Yield farming",
+    "total": 0.0191931
+  },
+  {
+    "crypto": "SOL",
+    "type": "Lost while transferring",
+    "total": -0.25166834
+  }
+]

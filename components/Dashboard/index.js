@@ -38,6 +38,7 @@ const Dashboard = ({ data }) => {
               </Table.Summary.Cell>
               <Table.Summary.Cell>-</Table.Summary.Cell>
               <Table.Summary.Cell>-</Table.Summary.Cell>
+              <Table.Summary.Cell>-</Table.Summary.Cell>
               <Table.Summary.Cell>
                 <Text type="danger">{intl.format(totalBalance)}</Text>
               </Table.Summary.Cell>

@@ -1,4 +1,5 @@
 import { ticker } from "constants";
+import defiData from "constants/defi.json";
 
 export const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -8,7 +9,7 @@ export const intl = new Intl.NumberFormat("en-US", {
 
 export const calculateForDashboard = (doneOrders, prices) => {
   const values = [];
-  prices = prices.reduce(function (acc, cur, i) {
+  prices = prices.reduce(function (acc, cur) {
     acc[Object.keys(cur)[0]] = Object.values(cur)[0];
     return acc;
   }, {});
@@ -40,7 +41,13 @@ export const calculateForDashboard = (doneOrders, prices) => {
         return accumulator + parseFloat(currentValue.executedQty);
       }, 0);
 
-    const holdings = sumOfHoldingsBuy - sumOfHoldingsSell;
+    const defi = defiData
+      .filter((d) => d.crypto === symbol.replace(ticker, ""))
+      .reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.total;
+      }, 0);
+
+    const holdings = sumOfHoldingsBuy - sumOfHoldingsSell + defi;
 
     const value = price * holdings;
 
@@ -56,6 +63,7 @@ export const calculateForDashboard = (doneOrders, prices) => {
       soldNumber: sumOfSold,
       bought: intl.format(sumOfBought),
       boughtNumber: sumOfBought,
+      defi: defi.toFixed(5),
       holdings: holdings.toFixed(5),
       value: intl.format(value),
       valueNumber: value,

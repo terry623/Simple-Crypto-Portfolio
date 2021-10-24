@@ -24,6 +24,11 @@ export const dashboardColumns = [
     key: "bought",
   },
   {
+    title: "Defi",
+    dataIndex: "defi",
+    key: "defi",
+  },
+  {
     title: "Holdings",
     dataIndex: "holdings",
     key: "holdings",
