@@ -17,7 +17,7 @@ export const dashboardColumns = [
     title: "Price",
     dataIndex: "price",
     key: "price",
-    render: text => <>${text}</>,
+    render: (text) => <>${text}</>,
   },
   {
     title: "Sold",
@@ -38,6 +38,6 @@ export const dashboardColumns = [
     title: "Value",
     dataIndex: "value",
     key: "value",
-    render: text => <>${text}</>,
+    render: (text) => <>${text}</>,
   },
 ];
