@@ -32,7 +32,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  console.log(dashboardData);
   return (
     <div className={styles.container}>
       <Head>

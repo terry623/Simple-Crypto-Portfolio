@@ -27,7 +27,7 @@ const Dashboard = ({ data }) => {
           });
 
           return (
-            <Table.Summary.Row fixed>
+            <Table.Summary.Row>
               <Table.Summary.Cell>Total</Table.Summary.Cell>
               <Table.Summary.Cell>-</Table.Summary.Cell>
               <Table.Summary.Cell>
