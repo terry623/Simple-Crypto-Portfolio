@@ -43,5 +43,8 @@ export const dashboardColumns = [
     dataIndex: "roi",
     key: "roi",
     render: (text) => <>{text}%</>,
+    sorter: {
+      compare: (a, b) => a.roi - b.roi,
+    },
   },
 ];

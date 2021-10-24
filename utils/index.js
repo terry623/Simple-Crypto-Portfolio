@@ -1,11 +1,12 @@
 import { ticker } from "constants";
 
+export const intl = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  useGrouping: false,
+});
+
 export const calculateForDashboard = (doneOrders, prices) => {
-  const intl = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    useGrouping: false,
-  });
   const values = [];
   prices = prices.reduce(function (acc, cur, i) {
     acc[Object.keys(cur)[0]] = Object.values(cur)[0];
@@ -52,11 +53,14 @@ export const calculateForDashboard = (doneOrders, prices) => {
       price: intl.format(price),
       crypto: symbol.replace(ticker, ""),
       sold: intl.format(sumOfSold),
+      soldNumber: sumOfSold,
       bought: intl.format(sumOfBought),
+      boughtNumber: sumOfBought,
       holdings: holdings.toFixed(5),
       value: intl.format(value),
-      valueNotFormatted: value,
+      valueNumber: value,
       balance: intl.format(balance),
+      balanceNumber: balance,
       roi: (roi * 100).toFixed(2),
     });
   });
@@ -67,5 +71,5 @@ export const calculateForDashboard = (doneOrders, prices) => {
 export const calculateForAssetPie = (data) =>
   data.map((d) => ({
     type: d.crypto,
-    value: parseFloat(d.valueNotFormatted.toFixed(2)),
+    value: parseFloat(d.valueNumber.toFixed(2)),
   }));

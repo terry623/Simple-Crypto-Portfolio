@@ -1,6 +1,6 @@
 import React from "react";
 import { Pie, measureTextWidth } from "@ant-design/charts";
-import { calculateForAssetPie } from "utils";
+import { calculateForAssetPie, intl } from "utils";
 
 function renderStatistic(containerWidth, text, style) {
   const _measureTextWidth = (0, measureTextWidth)(text, style);
@@ -66,14 +66,13 @@ const AssetPie = ({ data }) => {
           const _container$getBoundin2 = container.getBoundingClientRect();
           const width = _container$getBoundin2.width;
           const text = datum
-            ? "$".concat(datum.value)
-            : "$".concat(
-                data
-                  .reduce(function (r, d) {
-                    return r + d.value;
-                  }, 0)
-                  .toFixed(2)
+            ? intl.format(datum.value)
+            : intl.format(
+                data.reduce(function (r, d) {
+                  return r + d.value;
+                }, 0)
               );
+
           return renderStatistic(width, text, { fontSize: 32 });
         },
       },
