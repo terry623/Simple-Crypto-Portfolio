@@ -1,6 +1,11 @@
 import { ticker } from "constants";
 
 export const calculateForDashboard = (doneOrders, prices) => {
+  const intl = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    useGrouping: false,
+  });
   const values = [];
   prices = prices.reduce(function (acc, cur, i) {
     acc[Object.keys(cur)[0]] = Object.values(cur)[0];
@@ -8,21 +13,19 @@ export const calculateForDashboard = (doneOrders, prices) => {
   }, {});
 
   doneOrders.forEach(({ symbol, orders }) => {
-    const price = parseFloat(prices[symbol]).toFixed(2);
+    const price = parseFloat(prices[symbol]);
 
     const sumOfSold = orders
       .filter((order) => order.side === "SELL")
       .reduce((accumulator, currentValue) => {
         return accumulator + parseFloat(currentValue.cummulativeQuoteQty);
-      }, 0)
-      .toFixed(2);
+      }, 0);
 
     const sumOfBought = orders
       .filter((order) => order.side === "BUY")
       .reduce((accumulator, currentValue) => {
         return accumulator + parseFloat(currentValue.cummulativeQuoteQty);
-      }, 0)
-      .toFixed(2);
+      }, 0);
 
     const sumOfHoldingsSell = orders
       .filter((order) => order.side === "SELL")
@@ -36,27 +39,33 @@ export const calculateForDashboard = (doneOrders, prices) => {
         return accumulator + parseFloat(currentValue.executedQty);
       }, 0);
 
-    const holdings = (sumOfHoldingsBuy - sumOfHoldingsSell).toFixed(5);
+    const holdings = sumOfHoldingsBuy - sumOfHoldingsSell;
 
-    const value = (price * holdings).toFixed(2);
+    const value = price * holdings;
+
+    const balance = value + sumOfSold - sumOfBought;
+
+    const roi = balance / sumOfBought;
 
     values.push({
       key: symbol,
-      price,
+      price: intl.format(price),
       crypto: symbol.replace(ticker, ""),
-      sold: sumOfSold,
-      bought: sumOfBought,
-      holdings,
-      value,
+      sold: intl.format(sumOfSold),
+      bought: intl.format(sumOfBought),
+      holdings: holdings.toFixed(5),
+      value: intl.format(value),
+      valueNotFormatted: value,
+      balance: intl.format(balance),
+      roi: (roi * 100).toFixed(2),
     });
   });
 
   return values;
 };
 
-export const calculateForAssetPie = (data) => {
-  return data.map((d) => ({
+export const calculateForAssetPie = (data) =>
+  data.map((d) => ({
     type: d.crypto,
-    value: parseFloat(d.value),
+    value: parseFloat(d.valueNotFormatted.toFixed(2)),
   }));
-};
