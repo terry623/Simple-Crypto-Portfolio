@@ -13,10 +13,5 @@
     "crypto": "SOL",
     "type": "Yield farming",
     "total": 0.0191931
-  },
-  {
-    "crypto": "SOL",
-    "type": "Lost while transferring",
-    "total": -0.25166834
   }
 ]
