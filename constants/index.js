@@ -1,4 +1,13 @@
-export const cryptos = ["BTC", "ETH", "FTT", "SOL", "AVAX", "FLOW"];
+export const cryptos = [
+  "BTC",
+  "ETH",
+  "FTT",
+  "SOL",
+  "AVAX",
+  "FTM",
+  "THETA",
+  "FLOW",
+];
 
 export const ticker = "USDT";
 

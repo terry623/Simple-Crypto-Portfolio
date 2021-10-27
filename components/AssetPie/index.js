@@ -39,13 +39,12 @@ const AssetPie = ({ data }) => {
     colorField: "type",
     radius: 1,
     innerRadius: 0.64,
-    legend: false,
     label: {
       type: "inner",
       offset: "-50%",
       style: { textAlign: "center" },
       autoRotate: false,
-      content: "{name}\n{percentage}",
+      content: "{percentage}",
     },
     statistic: {
       title: {
@@ -97,7 +96,7 @@ const AssetPie = ({ data }) => {
       },
     ],
   };
-  return <Pie {...config} />;
+  return <Pie width={600} {...config} />;
 };
 
 export default AssetPie;
