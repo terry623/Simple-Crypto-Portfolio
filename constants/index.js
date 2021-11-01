@@ -4,7 +4,6 @@ export const cryptos = [
   "FTT",
   "SOL",
   "AVAX",
-  "DOT",
   "FLOW",
 ];
 
