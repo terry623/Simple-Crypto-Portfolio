@@ -1,18 +1,22 @@
 export const cryptos = [
-  "BTC",
-  "ETH",
-  "FTT",
-  "SOL",
-  "AVAX",
+  { coin: "BTC", ticker: "USDT" },
+  { coin: "ETH", ticker: "USDT" },
+  { coin: "FTT", ticker: "USDT" },
+  { coin: "SOL", ticker: "USDT" },
+  { coin: "AVAX", ticker: "USDT" },
+  { coin: "BNB", ticker: "BUSD" },
 ];
-
-export const ticker = "USDT";
 
 export const dashboardColumns = [
   {
     title: "Cypto",
     dataIndex: "crypto",
     key: "crypto",
+  },
+  {
+    title: "Ticker",
+    dataIndex: "ticker",
+    key: "ticker",
   },
   {
     title: "Price",

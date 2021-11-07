@@ -30,6 +30,7 @@ const Dashboard = ({ data }) => {
             <Table.Summary.Row>
               <Table.Summary.Cell>Total</Table.Summary.Cell>
               <Table.Summary.Cell>-</Table.Summary.Cell>
+              <Table.Summary.Cell>-</Table.Summary.Cell>
               <Table.Summary.Cell>
                 <Text type="danger">{intl.format(totalSold)}</Text>
               </Table.Summary.Cell>

@@ -1,4 +1,3 @@
-import { ticker } from "constants";
 import defiData from "constants/defi.json";
 
 export const intl = new Intl.NumberFormat("en-US", {
@@ -42,7 +41,7 @@ export const calculateForDashboard = (doneOrders, prices) => {
       }, 0);
 
     const defi = defiData
-      .filter((d) => d.crypto === symbol.replace(ticker, ""))
+      .filter((d) => symbol.startsWith(d.crypto))
       .reduce((accumulator, currentValue) => {
         return accumulator + currentValue.total;
       }, 0);
@@ -58,7 +57,8 @@ export const calculateForDashboard = (doneOrders, prices) => {
     values.push({
       key: symbol,
       price: intl.format(price),
-      crypto: symbol.replace(ticker, ""),
+      crypto: symbol.slice(0, -4),
+      ticker: symbol.slice(-4),
       sold: intl.format(sumOfSold),
       soldNumber: sumOfSold,
       bought: intl.format(sumOfBought),

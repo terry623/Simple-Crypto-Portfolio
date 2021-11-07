@@ -17,13 +17,15 @@ export default function Home() {
   const [dashboardData, setDashboardData] = useState([]);
 
   useEffect(() => {
+    const cryptoArray = cryptos.map((crypto) => crypto.coin + crypto.ticker);
+
     const fetchData = async () => {
       const doneOrders = await axios
-        .get(`/api/getDoneOrders?cryptos=${cryptos}`)
+        .get(`/api/getDoneOrders?cryptos=${cryptoArray}`)
         .then((res) => res.data);
 
       const prices = await axios
-        .get(`/api/getPrices?cryptos=${cryptos}`)
+        .get(`/api/getPrices?cryptos=${cryptoArray}`)
         .then((res) => res.data);
 
       setDashboardData(calculateForDashboard(doneOrders, prices));
