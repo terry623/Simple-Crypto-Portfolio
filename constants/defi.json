@@ -1,17 +1,18 @@
 [
   {
     "crypto": "BTC",
-    "type": "Yield farming",
     "total": -0.00106005
   },
   {
     "crypto": "ETH",
-    "type": "Yield farming",
     "total": -0.00264
   },
   {
     "crypto": "FTT",
-    "type": "Yield farming",
     "total": -0.139336
+  },
+  {
+    "crypto": "BNB",
+    "total": 0.01115346
   }
 ]
