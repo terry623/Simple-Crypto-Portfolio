@@ -4,8 +4,6 @@ export const cryptos = [
   { coin: "AVAX", ticker: "USDT" },
   { coin: "SOL", ticker: "USDT" },
   { coin: "LUNA", ticker: "USDT" },
-  { coin: "NEAR", ticker: "USDT" },
-  { coin: "ONE", ticker: "USDT" },
   { coin: "FTT", ticker: "USDT" },
   { coin: "BNB", ticker: "BUSD" },
 ];
