@@ -48,19 +48,19 @@ const AssetPie = ({ data }) => {
     },
     statistic: {
       title: {
-        offsetY: -8,
+        offsetY: -12,
         customHtml: function customHtml(container, view, datum) {
           const _container$getBoundin = container.getBoundingClientRect();
           const width = _container$getBoundin.width;
           const height = _container$getBoundin.height;
           const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
           const text = datum ? datum.type : "Total Value";
-          return renderStatistic(d, text, { fontSize: 28 });
+          return renderStatistic(d, text, { fontSize: 16 });
         },
       },
       content: {
-        offsetY: 4,
-        style: { fontSize: "32px" },
+        offsetY: 0,
+        style: { fontSize: "28px" },
         customHtml: function customHtml(container, view, datum, data) {
           const _container$getBoundin2 = container.getBoundingClientRect();
           const width = _container$getBoundin2.width;
@@ -72,7 +72,7 @@ const AssetPie = ({ data }) => {
                 }, 0)
               );
 
-          return renderStatistic(width, text, { fontSize: 32 });
+          return renderStatistic(width, text, { fontSize: 24 });
         },
       },
     },
@@ -96,7 +96,7 @@ const AssetPie = ({ data }) => {
       },
     ],
   };
-  return <Pie width={600} {...config} />;
+  return <Pie width={400} {...config} />;
 };
 
 export default AssetPie;
