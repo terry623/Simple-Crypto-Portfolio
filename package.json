@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && next export",
     "start": "next start -p 8081",
     "pm2": "pm2 start --name crypto npm -- start",
     "lint": "next lint"
